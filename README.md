@@ -30,9 +30,9 @@ $ rails generate focas:install
 
 ```yml
 - config.production_mode # 0: 開發環境 / 1: 正式站，預設為 0
+- config.mer_id # 通常是統編
 - config.marchant_id # 商店 ID
-- config.hash_key
-- config.hash_iv
+- config.terminal_id # 付費終端機 ID
 ```
 
 ## Usage
