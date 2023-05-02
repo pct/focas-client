@@ -16,6 +16,7 @@ module Focas
     mattr_accessor :api_base_url # 依據 production_mode 設定 api 網址
 
     OPTIONS = %w[
+      token
       merID
       MerchantID
       TerminalID
@@ -45,6 +46,7 @@ module Focas
     # 標 **[必] 為必填，另外 threeDSAuthInd 是 3DS 驗證，需要時就必填 
     # TradeInfo 參數
     MAPPING_TABLE = {
+      token: 'token', # **[必] 驗證參數，於商店自行設定 token
       merID: 'mer_id', # **[必] 網站特店自訂代碼(請注意 merID 與 MerchantID 不同), number <= 10
       MerchantID: 'merchant_id', # **[必] 收單銀行授權使用的特店代號(由收單銀行編製提供), number 固定 15
       TerminalID: 'terminal_id', # **[必] 收單銀行授權使用的機台代號(由收單銀行編製提供), number 固定 8

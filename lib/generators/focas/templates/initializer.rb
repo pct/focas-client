@@ -8,6 +8,9 @@ Focas.configure do |config|
   # (0/1 使用財金資訊 正式站與否，預設為 0 測試站)
   config.production_mode = 0
 
+  # **[必] 驗證參數(請於商店設定)
+  config.token = ''
+
   # **[必] 網站特店自訂代碼(請注意 merID 與 MerchantID 不同), number <= 10 (通常是統編)
   config.mer_id = ''
 
@@ -17,11 +20,12 @@ Focas.configure do |config|
   # **[必] 收單銀行授權使用的機台代號(由收單銀行編製提供), number 固定 8
   config.terminal_id = ''
   
+  # **[必] 客製化付款授權網頁辨識碼(0: 預設不客製 / 1-8: 樣式1-8)
+  config.customize = 0
+
   # 特店名稱，僅供顯示
   config.merchant_name = ''
 
-  # **[必] 客製化付款授權網頁辨識碼(0: 預設不客製 / 1-8: 樣式1-8)
-  config.customize = 1
 
   # ========
   # 其他參數

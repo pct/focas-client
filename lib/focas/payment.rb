@@ -50,6 +50,14 @@ module Focas
     def set_trade_info
       options = Config.options
       @trade_info = options.transform_keys(&:to_sym).to_h
+      local_date = Time.now.strftime('%Y%m%d')
+      local_time = Time.now.strftime('%H%M%S')
+      trade_time = "#{local_date}#{local_time}"
+
+      # 訂單編號&交易金額&驗證參數&特店代號&端末代號&交易時間
+      hash_string = "#{@lidm}#{@purch_amt}#{@trade_info[:token]}#{@trade_info[:merchant_id]}#{@trade_info[:terminal_id]}#{trade_time}"
+
+      req_token = Digest::SHA256.hexdigest(hash_string).upcase
 
       individual_trade_info = {
         lidm: @lidm, # 商店訂單編號，如：用途_日期時間戳記_流水號
@@ -57,6 +65,9 @@ module Focas
         CurrencyNote: @currency_note, # 商品資訊
         # 回傳網址
         AuthResURL: @auth_res_url,
+        reqToken: req_token,
+        LocalDate: local_date,
+        LocalTime: local_time
       }
 
       individual_trade_info.merge!(options[:trade_info]) if options[:trade_info]
