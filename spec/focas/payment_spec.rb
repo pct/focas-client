@@ -2,14 +2,11 @@ RSpec.describe 'Focas::Payment 付款' do
   describe '* 檢查付款表單裡面的值' do
     lidm = Focas.create_lidm
 
-    trade_info = Focas::Payment.new(
+    params = Focas::Payment.new(
       lidm: lidm,
       purch_amt: 100
-    )
+    ).trade_info
 
-    params = trade_info.gen_payment_params
-
-    puts Focas.get_payment_url
     puts params
 
     it '* 測試商店 merID 有正確代入' do

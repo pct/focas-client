@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-focas.configure do |config|
+Focas.configure do |config|
   # ========
   # 必要參數
   # ========
@@ -47,8 +47,8 @@ focas.configure do |config|
   # *[必] 網頁編碼格式(預設為 BIG5)，所以必傳 "UTF-8"
   config.encode_type = 'UTF-8'
   
-  # 設定交易逾時秒數，固定長度 3 位 (最大值為 600 秒)
-  config.timeout_secs = 600
+  # 設定交易逾時秒數，固定長度 3 位 (最大值為 600 秒)，先不設定，使用 600 會錯
+  #config.timeout_secs = 600
   
   # 交易幣別，固定長度 3 位 (901)
   config.currency = 901

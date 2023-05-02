@@ -29,26 +29,15 @@ $ rails generate focas:install
 設定 `config/initializers/focas.rb`：
 
 ```yml
-- config.production_mode # 0: 開發環境 / 1: 正式站，預設為 0
-- config.mer_id # 通常是統編
-- config.marchant_id # 商店 ID
-- config.terminal_id # 付費終端機 ID
+- config.production_mode        # 0: 開發環境 / 1: 正式站，預設為 0
+- config.mer_id = ''            # 通常是統編
+- config.marchant_id = ''       # 商店 ID
+- config.terminal_id = ''       # 付費終端機 ID
+- config.customize = 1          # 使用客製頁面1
+- config.auto_cap = 1           # 自動請款
+- config.encode_type = 'UTF-8'  # 編碼一定要用 UTF-8，避免亂碼
+- config.currency = 901         # 交易幣別，901 新台幣
 ```
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/pct/focas-client.
-
 
 ## License
 

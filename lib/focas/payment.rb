@@ -45,19 +45,11 @@ module Focas
       @response['Status'] == 'SUCCESS'
     end
 
-    def gen_payment_params
-      {
-        merID: Config.options[:merID], # merID (統一編號)
-        MerchantID: Config.options[:MerchantID], # 商店 ID
-        TerminalID: Config.options[:TerminalID], # 終端機
-      }
-    end
-
     private
 
     def set_trade_info
       options = Config.options
-      @trade_info = options.transform_keys(&:to_sym)
+      @trade_info = options.transform_keys(&:to_sym).to_h
 
       individual_trade_info = {
         lidm: @lidm, # 商店訂單編號，如：用途_日期時間戳記_流水號
@@ -67,7 +59,10 @@ module Focas
         AuthResURL: @auth_res_url,
       }
 
-      @trade_info.merge!(individual_trade_info)
+      individual_trade_info.merge!(options[:trade_info]) if options[:trade_info]
+
+      # 同是 hash 再來 merge
+      @trade_info = (options.to_h.merge!(individual_trade_info)).transform_keys(&:to_sym)
     end
   end
 end

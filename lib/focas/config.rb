@@ -65,7 +65,7 @@ module Focas
       enCodeType: 'encode_type', # *[必] 網頁編碼格式(預設為 BIG5)，所以必傳 "UTF-8"
       timeoutDate: 'timeout_date', # 設定交易逾時日期(yyyymmdd)，固定長度 8 位
       timeoutTime: 'timeout_time', # 設定交易逾時起始時間(HHMMSS)，固定長度 6 位
-      timeoutSecs: 'timeout_secs', # 設定交易逾時秒數，固定長度 3 位 (最大值為 600 秒)
+      timeoutSecs: 'timeout_secs', # 設定交易逾時秒數，固定長度 3 位 (最大值為 600 秒)，先不設定，使用 600 會錯
       Currency: 'currency', # 交易幣別，固定長度 3 位 (901)
       lagSelect: 'lag_select', # 語言選擇，固定長度 1 位 (0: 繁 / 1: 簡 / 2: 英 / 3: 日 )
       threeDSAuthInd: 'three_ds_auth_ind', # 3D 交易驗證類型，若該特店設定支援 3D 交易，前端未帶此欄位，則預設為 0101 (0101 表示支付類交易驗證(PA)的 Payment transaction。 0204 表示非支付類交易驗證(NPA)的 Add card。0205 表示非支付類交易驗證(NPA)的 Maintain card。 註:綁卡驗證應使用 0204 或 0205)
