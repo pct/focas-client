@@ -28,4 +28,9 @@ RSpec.describe 'Focas::Config 設定' do
     request_url = Focas.get_payment_url
     expect(request_url).to eq "#{Focas.api_base_url}/FOCAS_WEBPOS/online/"
   end
+
+  it '* 測試 respToken 沒有亂給' do
+    ret = Focas.check_resp_token({})
+    expect(ret).to eq false
+  end
 end

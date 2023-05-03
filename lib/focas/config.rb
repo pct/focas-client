@@ -100,5 +100,55 @@ module Focas
     def create_lidm
       lidm = "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{SecureRandom.hex(2).upcase}"
     end
+
+    def check_resp_token(data)
+      # 資料錯誤的先 return
+      return false if not data
+
+      ret = data.transform_keys(&:to_sym)
+      return false if not ret[:respToken]
+
+      begin
+        # to hash
+        resp_token = ret[:respToken]
+
+        options = Config.options
+        settings = options.transform_keys(&:to_sym)
+
+        # 檢查 ret[:status] 成功或失敗
+        if ret[:status] == '0'
+          # 成功
+          tmp_arr = %W(
+          #{ret[:status]}
+          #{ret[:lidm]}
+          #{settings[:token]}
+          #{ret[:authCode]}
+          #{ret[:authRespTime]}
+          #{settings[:MerchantID]}
+          #{settings[:TerminalID]}
+          )
+
+          hash_string = tmp_arr.join('&')
+        else
+          # 失敗
+          tmp_arr = %W(
+          #{ret[:status]}
+          #{ret[:errcode]}
+          #{ret[:lidm]}
+          #{settings[:token]}
+          #{ret[:authRespTime]}
+          #{settings[:MerchantID]}
+          #{settings[:TerminalID]}
+          )
+        end
+
+        # 開始驗證 token
+        hash_token = Digest::SHA256.hexdigest(hash_string).upcase
+        return (resp_token.upcase == hash_token)
+      rescue
+        return false
+      end
+    end
+
   end
 end
