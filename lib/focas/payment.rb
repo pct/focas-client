@@ -2,6 +2,7 @@
 
 require 'net/http'
 require 'json'
+require 'digest'
 
 require_relative 'config'
 require_relative 'errors'
