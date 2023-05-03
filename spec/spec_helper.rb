@@ -3,6 +3,7 @@ require "focas-client"
 
 Focas.configure do |configure|
   configure.production_mode = 0
+  configure.token = ENV.fetch('token', nil)
   configure.mer_id = ENV.fetch('merID', nil)
   configure.merchant_id = ENV.fetch('MerchantID', nil)
   configure.terminal_id = ENV.fetch('TerminalID', nil)

@@ -8,6 +8,10 @@ RSpec.describe 'Focas::Payment 付款' do
     ).trade_info
 
     puts params
+    
+    it '* 測試商店 token 不該在 trade_info 出現' do
+      expect(params[:token]).to eq nil
+    end
 
     it '* 測試商店 merID 有正確代入' do
       expect(params[:merID]).to eq Focas.options[:merID]

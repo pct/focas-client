@@ -53,13 +53,12 @@ module Focas
       ret = data.transform_keys(&:to_sym).to_h
       return false if not ret[:respToken].present?
 
-
       begin
         # to hash
         resp_token = ret[:respToken]
 
         options = Config.options
-        settings = options.transform_keys(&:to_sym).to_h
+        settings = options.transform_keys(&:to_sym)
 
         # 檢查 ret[:status] 成功或失敗
         if ret[:status] == '0'
@@ -70,8 +69,8 @@ module Focas
           #{settings[:token]}
           #{ret[:authCode]}
           #{ret[:authRespTime]}
-          #{settings[:merchant_id]}
-          #{settings[:terminal_id]}
+          #{settings[:MerchantID]}
+          #{settings[:TerminalID]}
           )
 
           hash_string = tmp_arr.join('&')
@@ -83,8 +82,8 @@ module Focas
           #{ret[:lidm]}
           #{settings[:token]}
           #{ret[:authRespTime]}
-          #{settings[:merchant_id]}
-          #{settings[:terminal_id]}
+          #{settings[:MerchantID]}
+          #{settings[:TerminalID]}
           )
         end
 
@@ -100,21 +99,19 @@ module Focas
 
     def set_trade_info
       options = Config.options
-      @trade_info = options.transform_keys(&:to_sym).to_h
-      # 應移除 token，不該曝光
-      @trade_info.delete(:token)
+      @trade_info = options.transform_keys(&:to_sym)
 
       local_date = Time.now.strftime('%Y%m%d')
       local_time = Time.now.strftime('%H%M%S')
       trade_time = "#{local_date}#{local_time}"
-
+        
       # 訂單編號&交易金額&驗證參數&特店代號&端末代號&交易時間
       tmp_arr = %W(
         #{@lidm}
         #{@purch_amt}
-        #{options[:token]}
-        #{options[:merchant_id]}
-        #{options[:terminal_id]}
+        #{@trade_info[:token]}
+        #{@trade_info[:MerchantID]}
+        #{@trade_info[:TerminalID]}
         #{trade_time}
       )
 
@@ -133,10 +130,8 @@ module Focas
         LocalTime: local_time
       }
 
-      individual_trade_info.merge!(options[:trade_info]) if options[:trade_info]
-
-      # 同是 hash 再來 merge
-      @trade_info = (options.to_h.merge!(individual_trade_info)).transform_keys(&:to_sym)
+      # 應移除 token，不該曝光
+      @trade_info.merge!(individual_trade_info).delete(:token)
     end
   end
 end
