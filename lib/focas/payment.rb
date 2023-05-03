@@ -101,6 +101,9 @@ module Focas
     def set_trade_info
       options = Config.options
       @trade_info = options.transform_keys(&:to_sym).to_h
+      # 應移除 token，不該曝光
+      @trade_info.delete(:token)
+
       local_date = Time.now.strftime('%Y%m%d')
       local_time = Time.now.strftime('%H%M%S')
       trade_time = "#{local_date}#{local_time}"
