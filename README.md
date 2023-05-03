@@ -33,7 +33,7 @@ $ rails generate focas:install
 - config.mer_id = ''            # 通常是統編
 - config.marchant_id = ''       # 商店 ID
 - config.terminal_id = ''       # 付費終端機 ID
-- config.token = ''             # 驗證參數(token)，須在商店設定好
+- config.token = ''             # 驗證參數(token)，須在商店設定好，請銀行人員人工放行
 - config.customize = 1          # 使用客製頁面1
 - config.auto_cap = 1           # 自動請款
 - config.encode_type = 'UTF-8'  # 編碼一定要用 UTF-8，避免亂碼

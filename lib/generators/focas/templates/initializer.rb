@@ -8,7 +8,7 @@ Focas.configure do |config|
   # (0/1 使用財金資訊 正式站與否，預設為 0 測試站)
   config.production_mode = 0
 
-  # **[必] 驗證參數(請於商店設定)
+  # **[必] 驗證參數(請於商店設定，然後請銀行人員人工放行)
   config.token = ''
 
   # **[必] 網站特店自訂代碼(請注意 merID 與 MerchantID 不同), number <= 10 (通常是統編)
