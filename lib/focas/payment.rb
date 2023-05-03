@@ -109,7 +109,16 @@ module Focas
       trade_time = "#{local_date}#{local_time}"
 
       # 訂單編號&交易金額&驗證參數&特店代號&端末代號&交易時間
-      hash_string = "#{@lidm}#{@purch_amt}#{@trade_info[:token]}#{@trade_info[:merchant_id]}#{@trade_info[:terminal_id]}#{trade_time}"
+      tmp_arr = %W(
+        #{@lidm}
+        #{@purch_amt}
+        #{options[:token]}
+        #{options[:merchant_id]}
+        #{options[:terminal_id]}
+        #{trade_time}
+      )
+
+      hash_string = tmp_arr.join('&')
 
       req_token = Digest::SHA256.hexdigest(hash_string).upcase
 
