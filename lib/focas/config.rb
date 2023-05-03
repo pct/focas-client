@@ -102,10 +102,13 @@ module Focas
     end
 
     def check_resp_token(data)
+      #data = {"errcode"=>"00", "authCode"=>"AB1234", "authRespTime"=>"20230503171010", "lastPan4"=>"5101", "amtExp"=>"0", "xid"=>"O-OBJECT-xxx", "errDesc"=>"", "lidm"=>"20230503170906_493C", "authAmt"=>"5000", "currency"=>"", "merID"=>"xxx", "cardBrand"=>"VISA", "pan"=>"xxx", "status"=>"0", "respToken"=>"xxx"}
+
       # 資料錯誤的先 return
       return false if not data
 
       ret = data.transform_keys(&:to_sym)
+
       return false if not ret[:respToken]
 
       begin
@@ -144,6 +147,12 @@ module Focas
 
         # 開始驗證 token
         hash_token = Digest::SHA256.hexdigest(hash_string).upcase
+
+        #puts "hash_string: #{hash_string}"
+        #puts "hash_token: #{hash_token}"
+        #puts "resp_token: #{resp_token}"
+        #puts (resp_token == hash_token)
+
         return (resp_token.upcase == hash_token)
       rescue
         return false
