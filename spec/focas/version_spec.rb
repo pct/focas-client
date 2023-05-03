@@ -1,5 +1,5 @@
 RSpec.describe 'Focas::Version 版本' do
   it "* Gem 版本" do
-    expect(Focas::VERSION).to eq '0.1.3'
+    expect(Focas::VERSION).to eq '0.1.4'
   end
 end
